@@ -1,0 +1,30 @@
+initialize() {
+	initializeMutationRate(1e-6);
+	initializeMutationType("m1", 0.5, "f", 0.0);
+	initializeGenomicElementType("g1", m1, 1.0);
+	initializeGenomicElement(g1, 0, 9999);
+	initializeRecombinationRate(1e-4);
+}
+
+// Create the population
+1 early() { 
+	sim.addSubpop("p1", 1000); 
+	log = community.createLogFile("slim-out/oneWFpop-ntrl.txt", logInterval=10);
+	log.addCycle();
+	log.addCustomColumn("Theta","calcWattersonsTheta(sim.subpopulations.genomes);");
+	log.addCustomColumn("ind.mut","mean(sim.subpopulations.individuals.countOfMutationsOfType(m1));");
+	log.addCustomColumn("tot.mut","length(sim.mutationsOfType(m1));");
+}
+
+
+// Generation 10000 is the last.  Output and terminate.
+10001 late() {
+	theta = calcWattersonsTheta(sim.subpopulations.genomes);
+	catn("Population Theta is: " + theta);
+	nm = mean(sim.subpopulations.individuals.countOfMutationsOfType(m1));
+	catn("Num mutations per individual: " + nm);
+	catn("Sim num mutations: " + length(sim.mutationsOfType(m1)));
+	catn("Sim num substitutions: " + length(sim.substitutions));
+	catn("Freq mutations: " + mean(sim.mutationFrequencies(NULL,NULL)));
+}
+
