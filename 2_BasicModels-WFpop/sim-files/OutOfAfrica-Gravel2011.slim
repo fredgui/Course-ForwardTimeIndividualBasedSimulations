@@ -54,8 +54,15 @@ initialize() {
 
 // Generation 58000 is the present.  Output and terminate.
 58000 late() {
-	p1.outputSample(200); // YRI phase 3 sample of size 108
-	p2.outputSample(200); // CEU phase 3 sample of size 99
-	p3.outputSample(200); // CHB phase 3 sample of size 103
+//	p1.outputSample(200); // YRI phase 3 sample of size 108
+//	p2.outputSample(200); // CEU phase 3 sample of size 99
+//	p3.outputSample(200); // CHB phase 3 sample of size 103
+	fst13 = calcFST(p1.genomes,p3.genomes);
+	catn("Fst 1.3 = " + fst13);
+	fst = calcFST(p2.genomes,p1.genomes);
+	catn("Fst 1.2 = " + fst);
+	fst = calcFST(p2.genomes,p3.genomes);
+	catn("Fst 2.3 = " + fst);
+	
 }
 
