@@ -20,8 +20,8 @@ setwd("/path/to/7_Competition")
 data          <- read.table("Competition_q_{{1,2,3,4,5}{1,2,3,4,5}}_bygen.txt", header=T)
 data_genotype <- read.table("Competition_q_{{1,2,3,4,5}{1,2,3,4,5}}_2000_1.quanti", header=T)          # t=2000, replicate 1
 
-# data          <- read.table("resource_q_{{0,1.5,3,4.5,6}{0,1.5,3,4.5,6}}_bygen.txt", header=T)
-# data_genotype <- read.table("resource_q_{{0,1.5,3,4.5,6}{0,1.5,3,4.5,6}}_2000_1.quanti", header=T)          # t=2000, replicate 1
+# data          <- read.table("Competition_q_{{0,1.5,3,4.5,6}{0,1.5,3,4.5,6}}_bygen.txt", header=T)
+# data_genotype <- read.table("Competition_q_{{0,1.5,3,4.5,6}{0,1.5,3,4.5,6}}_2000_1.quanti", header=T)          # t=2000, replicate 1
 
 # resource variation      ----
 # 1. res distr ...............
