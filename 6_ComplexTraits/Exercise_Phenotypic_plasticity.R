@@ -7,19 +7,19 @@ rm(list=ls())
 # info         ----
 # -> Lets first explore the temporal dynamics of evolution at the example of a single simulation with no plasticity g1=0
 # -> to do so:
-#    1) adapt the path in line 15 to your computer
-#    2) mark all lines between 15 and 70, run them, and look at the resulting four graphs 
-#    3) ProTip: you can collapse single sections when clicking on the arrows beside the line numbers
+#    1) adapt the path in line 19 to your computer
+#    2) mark all lines between 19 and 75, run them, and look at the resulting four graphs 
+#    3) ProTip: you can collapse single sections when clicking on the arrows beside the line numbers on the left
 #    4) now you can change a parameter in the ini-file (e.g., dispersal rate or selection strength), 
 #       rerun the simulations, and repeat the plotting
 #    5) add new plasticity levels to line 47 of "Exercise_Phenotypic_plasticity.ini"
-#       note that you need to adapt the file path in line 15 and 87 of this R script when plotting a different plasticity scenario
+#       note that you need to add/adapt the file path in line 21 and line 89 of this R script when plotting a different plasticity scenario
 
 # load data    ####
 setwd("/path/to/directory/6_Plasticity")
 
-# data <- read.table("Plasticity_g1_{{0}}_bygen.txt", header=T)
-data <- read.table("Plasticity_g1_{{0.5}}_bygen.txt", header=T)
+data <- read.table("Plasticity_g1_{{0}}_bygen.txt", header=T)
+# data <- read.table("Plasticity_g1_{{0.5}}_bygen.txt", header=T)
 
 # plot avg. z  ----
 par(mfrow=c(2,2))
