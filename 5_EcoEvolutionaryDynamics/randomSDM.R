@@ -2,7 +2,7 @@
 
 rm(list=ls(all=TRUE)) 
 
-setwd("~/Desktop/Winterschool-Finlande/simulate-SDM")
+setwd("~/Desktop/Winterschool-Finlande/NEMOAGE-schoolversion/Grid/simulate-SDM")
 
 library(raster, quietly = T)
 library(virtualspecies)
@@ -114,7 +114,7 @@ de1 <- extract(envmatrix(e1,finland,myext),myext, cellnumbers=TRUE)
 de2<-extract(envmatrix(e2,finland,myext),myext, cellnumbers=TRUE)
 
 # environmental values are paired for nemo input - see nemoage manual
-de=cbind(de1[,2],de2[,2])
+de=cbind(de1[,2]/10,de2[,2])
 write.matrix.nemo(de,"current_env.txt")
 
 ## Generate dispersal kernel ####
@@ -229,7 +229,7 @@ Projenvmatrix=function(environmental.variable,area1,area2){
 
 # projected temperature are given in 10*C
 
-f70b1=extract(Projenvmatrix(f1,finland,myext)/10,myext,cellnumbers=TRUE)
+f70b1=extract(Projenvmatrix(f1,finland,myext),myext,cellnumbers=TRUE)
 f70b2=extract(Projenvmatrix(f2,finland,myext),myext,cellnumbers=TRUE)
 
 # from here we need a rate of environmental change by cell
@@ -237,7 +237,7 @@ f70b2=extract(Projenvmatrix(f2,finland,myext),myext,cellnumbers=TRUE)
 
 # the maximum rate of change is then (Tpt[2061]-Tpt[2023])/38
 
-rateb1=(f70b1[,2]-de[,1])/(2061-2023)
+rateb1=(f70b1[,2]/10-de[,1])/(2061-2023)
 rateb2=(f70b2[,2]-de[,2])/(2061-2023)
 
 futurenv=cbind(rateb1,rateb2)
@@ -247,11 +247,14 @@ write.matrix.nemo(futurenv,"rate_chgt_env.txt")
 
 niche1=c(((datpres>0)+0)*as.matrix(envmatrix(e1,finland,myext)))
 niche1=niche1[niche1!=0]
-mean(niche1)
+niche1[is.na(niche1)]=0
+niche1=niche1/10
+mean(niche1,na.rm=T)
 sd(niche1)
 
 niche2=c(((datpres>0)+0)*as.matrix(envmatrix(e2,finland,myext)))
 niche2=niche2[niche2!=0]
+niche2[is.na(niche2)]=0
 mean(niche2)
 sd(niche2)
 
